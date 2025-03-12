@@ -1,4 +1,6 @@
-local ped = PlayerPedId()
+CreateThread(function()
+    while true do
+        local ped = PlayerPedId()
         local veh = GetVehiclePedIsIn(ped, false)
         local coords = GetEntityCoords(veh ~= 0 and veh or ped)
         local _, z = GetGroundZCoordWithOffsets(coords.x, coords.y, 150.0, 0)
@@ -9,7 +11,7 @@ local ped = PlayerPedId()
         local shouldFreeze = false
 
         if coords.z < groundz and not IsPedSwimming(ped) and not IsPedSwimmingUnderWater(ped) and (IsPedFalling(ped) or (veh ~= 0 and IsEntityInAir(veh))) then
-            DrawText2D("~r~⚠️ Vous tombez sous le sol, appuyez sur E", 0.5, 0.8, 0.7)
+            DrawText2D("~r~⚠️ Appuyer sur E pour remonter à la surface", 0.5, 0.8, 0.7)
 
             if IsControlJustPressed(0, 38) then
                 ClearPedTasksImmediately(ped)
@@ -25,6 +27,7 @@ local ped = PlayerPedId()
 
                 ESX.ShowNotification("~c Vous êtes de nouveau sur le sol")
 
+
                 if shouldFreeze then
                     CreateThread(function()
                         FreezeEntityPosition(ped, true)
@@ -37,16 +40,5 @@ local ped = PlayerPedId()
             Wait(1000)
         end
         Wait(0)
-
-function DrawText2D(text, x, y, size)
-	SetTextScale(size, size)
-	SetTextFont(4)
-	SetTextProportional(1)
-	SetTextEntry("STRING")
-	SetTextCentre(1)
-	SetTextColour(255, 255, 255, 255)
-	SetTextOutline()
-
-	AddTextComponentString(text)
-	DrawText(x, y)
-end
+    end
+end)
