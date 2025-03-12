@@ -11,7 +11,7 @@ CreateThread(function()
         local shouldFreeze = false
 
         if coords.z < groundz and not IsPedSwimming(ped) and not IsPedSwimmingUnderWater(ped) and (IsPedFalling(ped) or (veh ~= 0 and IsEntityInAir(veh))) then
-            DrawText2D("~r~⚠️ Appuyer sur E pour remonter à la surface", 0.5, 0.8, 0.7)
+            DrawText2D("~r~⚠️ Vous tombez sous le sol, appuyez sur E", 0.5, 0.8, 0.7)
 
             if IsControlJustPressed(0, 38) then
                 ClearPedTasksImmediately(ped)
