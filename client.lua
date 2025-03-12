@@ -43,3 +43,15 @@ CreateThread(function()
     end
 end)
 
+function DrawText2D(text, x, y, size)
+	SetTextScale(size, size)
+	SetTextFont(4)
+	SetTextProportional(1)
+	SetTextEntry("STRING")
+	SetTextCentre(1)
+	SetTextColour(255, 255, 255, 255)
+	SetTextOutline()
+
+	AddTextComponentString(text)
+	DrawText(x, y)
+end
